@@ -7,7 +7,13 @@
     root.Roxanne = factory();
   }
 })(this, function() {
-  var Roxanne = {};
+  var Roxanne = function(value, model/*, sources... */) {
+    var sources = Array.prototype.slice.call(arguments, 1);
+
+    return sources.reduce(function(acc, source) {
+      return acc.merge(source);
+    }).scan(value, model);
+  };
 
   return Roxanne;
 });
